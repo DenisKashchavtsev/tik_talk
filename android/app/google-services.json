@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "133994461704",
+    "project_id": "tik-talk-e00b2",
+    "storage_bucket": "tik-talk-e00b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:133994461704:android:63beb83438efe3748fafbd",
+        "android_client_info": {
+          "package_name": "com.example.tik_talk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "133994461704-eeuue5qkul5en77o2ofhms71l9i3rf4j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZAS_PgenyC6E2TI3ANIODtmYC-ITZUZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "133994461704-eeuue5qkul5en77o2ofhms71l9i3rf4j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
