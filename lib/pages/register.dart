@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../services/auth_service.dart';
+import '../cubits/auth/register_cubit.dart';
 
 class Register extends StatelessWidget {
-  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -33,7 +33,7 @@ class Register extends StatelessWidget {
           ),
           ElevatedButton(
               onPressed: () {
-                AuthService.signUp(context, _emailController.text, _passwordController.text);
+                context.read<RegisterCubit>().register(context, _emailController.text, _passwordController.text);
               },
               child: const Text('Register')),
           TextButton(

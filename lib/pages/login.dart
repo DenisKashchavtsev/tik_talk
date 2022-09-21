@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../services/auth_service.dart';
+import '../cubits/auth/login_cubit.dart';
 
 class Login extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
@@ -33,7 +34,8 @@ class Login extends StatelessWidget {
           ),
           ElevatedButton(
               onPressed: () {
-                AuthService.signIn(context, _emailController.text, _passwordController.text);
+                context.read<LoginCubit>().login(
+                    context, _emailController.text, _passwordController.text);
               },
               child: const Text('Login')),
           TextButton(

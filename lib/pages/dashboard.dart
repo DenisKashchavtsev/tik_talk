@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../services/auth_service.dart';
-
 class Dashboard extends StatelessWidget {
   const Dashboard({Key? key}) : super(key: key);
 
