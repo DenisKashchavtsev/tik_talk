@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/user.dart' as model_user;
 import '../../repositories/auth_repository.dart';
+import '../../services/navigation_service.dart';
 
 part 'login_state.dart';
 
@@ -13,19 +14,17 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this._authRepository) : super(LoginState());
 
   Future<void> login(context, String email, String password) async {
+    emit(LoginState(loading: true));
     try {
-      print(await _authRepository.login(email, password));
+      await _authRepository.login(email, password);
 
-      emit(LoginState(user: model_user.User('email@gmail.com')));
+      emit(LoginState(user: model_user.User(email), loading: false));
 
-      Navigator.pushNamed(context, '/dashboard');
+      NavigationService().openDashboard();
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
+      emit(LoginState(user: null, error: e.message, loading: false));
     } catch (e) {
+      emit(LoginState(user: null, error: null, loading: false));
       throw e.toString();
     }
   }

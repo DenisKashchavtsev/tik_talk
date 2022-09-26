@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../cubits/auth/register_cubit.dart';
 
@@ -17,6 +18,18 @@ class Register extends StatelessWidget {
       ),
       body: Column(
         children: [
+          BlocBuilder<RegisterCubit, RegisterState>(
+            builder: (context, state) {
+              EasyLoading.dismiss();
+              if(state.loading != null && state.loading == true){
+                EasyLoading.show(status: 'loading...');
+              }
+              if (state.error != null) {
+                return Text('${state.error}');
+              }
+              return const SizedBox(height: 10,);
+            },
+          ),
           TextField(
             decoration: const InputDecoration(
               border: OutlineInputBorder(),

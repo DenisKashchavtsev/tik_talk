@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../cubits/auth/login_cubit.dart';
 
@@ -18,6 +19,18 @@ class Login extends StatelessWidget {
       body: Column(
         children: [
           const Text('test@gmail.com:123456'),
+          BlocBuilder<LoginCubit, LoginState>(
+            builder: (context, state) {
+              EasyLoading.dismiss();
+              if(state.loading != null && state.loading == true){
+                EasyLoading.show(status: 'loading...');
+              }
+              if (state.error != null) {
+                return Text('${state.error}');
+              }
+              return const Text('');
+            },
+          ),
           TextField(
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
