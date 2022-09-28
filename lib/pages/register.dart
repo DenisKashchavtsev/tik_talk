@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-import '../cubits/auth/register_cubit.dart';
+import '../cubits/register/register_cubit.dart';
 
 class Register extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();

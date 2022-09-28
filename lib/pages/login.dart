@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-import '../cubits/auth/login_cubit.dart';
+import '../cubits/login/login_cubit.dart';
 
 class Login extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();

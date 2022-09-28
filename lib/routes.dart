@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'cubits/auth/login_cubit.dart';
-import 'cubits/auth/register_cubit.dart';
+import 'cubits/login/login_cubit.dart';
+import 'cubits/register/register_cubit.dart';
+import 'cubits/user/user_cubit.dart';
 import 'pages/dashboard.dart';
 import 'pages/home.dart';
 import 'pages/login.dart';
 import 'pages/register.dart';
 import 'repositories/auth_repository.dart';
+import 'repositories/user_repository.dart';
 
 class Routes {
   final BuildContext context;
@@ -25,7 +27,14 @@ class Routes {
             create: (BuildContext context) => RegisterCubit(AuthRepository()),
             child: Register(),
           ),
-      '/dashboard': (context) => const Dashboard(),
+      '/dashboard': (context) => BlocProvider(
+            create: (context) {
+              final cubit = UserCubit(UserRepository());
+              cubit.getCurrentUser();
+              return cubit;
+            },
+            child: const Dashboard(),
+          ),
     };
   }
 }
