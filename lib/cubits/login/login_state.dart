@@ -1,9 +1,19 @@
 part of 'login_cubit.dart';
 
-class LoginState {
-  final model_user.User? user;
-  final String? error;
-  final bool? loading;
+abstract class LoginState {}
 
-  LoginState({this.user, this.error, this.loading});
+class LoginStateInitial extends LoginState {}
+
+class LoginStateLoading extends LoginState {}
+
+class LoginStateLoaded extends LoginState {
+  final model_user.User? user;
+
+  LoginStateLoaded({this.user});
+}
+
+class LoginStateError extends LoginState {
+  final String message;
+
+  LoginStateError({required this.message});
 }

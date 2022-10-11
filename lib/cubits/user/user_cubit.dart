@@ -9,11 +9,19 @@ part 'user_state.dart';
 class UserCubit extends Cubit<UserState> {
   final UserRepository _userRepository;
 
-  UserCubit(this._userRepository) : super(const UserState());
+  UserCubit(this._userRepository) : super(UserStateInitial());
 
   getCurrentUser() async {
-    final user = await _userRepository.getUser();
+    emit(UserStateLoading());
+    Future.delayed(Duration(seconds: 5), () async {
 
-    emit(UserState(user: user));
+      final user = await _userRepository.getUser();
+
+      emit(UserStateLoaded(user: user));
+
+
+    });
+
+
   }
 }

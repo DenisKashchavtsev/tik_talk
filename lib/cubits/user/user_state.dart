@@ -1,8 +1,18 @@
 part of 'user_cubit.dart';
 
 @immutable
-class UserState {
+abstract class UserState {
+  get user => null;
+}
+
+class UserStateInitial extends UserState {}
+
+class UserStateLoading extends UserState {}
+
+class UserStateLoaded extends UserState {
   final User? user;
 
-  const UserState({this.user});
+  UserStateLoaded({this.user});
 }
+
+class UserStateError extends UserState {}

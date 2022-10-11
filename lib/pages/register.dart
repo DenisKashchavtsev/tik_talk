@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'widgets/notifications/error.dart';
 
 import '../cubits/register/register_cubit.dart';
 
@@ -20,14 +20,15 @@ class Register extends StatelessWidget {
         children: [
           BlocBuilder<RegisterCubit, RegisterState>(
             builder: (context, state) {
-              EasyLoading.dismiss();
-              if(state.loading != null && state.loading == true){
-                EasyLoading.show(status: 'loading...');
+              if (state is RegisterStateLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               }
-              if (state.error != null) {
-                return Text('${state.error}');
+              if (state is RegisterStateError) {
+                return ErrorNotification(errorMessage: state.message);
               }
-              return const SizedBox(height: 10,);
+              return const Text('');
             },
           ),
           TextField(
@@ -46,12 +47,14 @@ class Register extends StatelessWidget {
           ),
           ElevatedButton(
               onPressed: () {
-                context.read<RegisterCubit>().register(context, _emailController.text, _passwordController.text);
+                context.read<RegisterCubit>().register(
+                    context, _emailController.text, _passwordController.text);
               },
               child: const Text('Register')),
           TextButton(
             onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/'));
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/login', ModalRoute.withName('/'));
             },
             child: const Text('Login'),
           ),

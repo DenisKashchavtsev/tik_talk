@@ -6,6 +6,6 @@ class NavigationService {
   BuildContext? get context => navigationKey.currentContext!;
 
   void openDashboard() {
-    Navigator.pushNamed(context!, '/dashboard');
+    Navigator.pushReplacementNamed(context!, '/dashboard');
   }
 }

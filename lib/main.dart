@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'configs/firebase_constants.dart';
 import 'routes.dart';
@@ -24,23 +23,6 @@ Future<void> main() async {
   }
 
   runApp(const App());
-  configLoading();
-}
-
-void configLoading() {
-  EasyLoading.instance
-    ..displayDuration = const Duration(milliseconds: 2000)
-    ..indicatorType = EasyLoadingIndicatorType.threeBounce
-    ..loadingStyle = EasyLoadingStyle.dark
-    ..indicatorSize = 45.0
-    ..radius = 10.0
-    ..progressColor = Colors.blue
-    ..backgroundColor = Colors.transparent
-    ..indicatorColor = Colors.blue
-    ..textColor = Colors.blue
-    ..maskColor = Colors.blue.withOpacity(0.5)
-    ..userInteractions = true
-    ..dismissOnTap = false;
 }
 
 class App extends StatelessWidget {
@@ -51,7 +33,6 @@ class App extends StatelessWidget {
     return MaterialApp(
       navigatorKey: NavigationService.navigationKey,
       routes: Routes(context).getRoutes(),
-      builder: EasyLoading.init(),
     );
   }
 }

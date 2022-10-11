@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../cubits/login/login_cubit.dart';
+import 'widgets/notifications/error.dart';
 
 class Login extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
@@ -21,12 +21,13 @@ class Login extends StatelessWidget {
           const Text('test@gmail.com:123456'),
           BlocBuilder<LoginCubit, LoginState>(
             builder: (context, state) {
-              EasyLoading.dismiss();
-              if(state.loading != null && state.loading == true){
-                EasyLoading.show(status: 'loading...');
+              if (state is LoginStateLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               }
-              if (state.error != null) {
-                return Text('${state.error}');
+              if (state is LoginStateError) {
+                return ErrorNotification(errorMessage: state.message);
               }
               return const Text('');
             },

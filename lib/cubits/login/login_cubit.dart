@@ -11,21 +11,25 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   final AuthRepository _authRepository;
 
-  LoginCubit(this._authRepository) : super(LoginState());
+  LoginCubit(this._authRepository) : super(LoginStateInitial());
 
   Future<void> login(context, String email, String password) async {
-    emit(LoginState(loading: true));
+    emit(LoginStateLoading());
     try {
       await _authRepository.login(email, password);
 
-      emit(LoginState(user: model_user.User(email), loading: false));
+      emit(LoginStateLoaded(user: model_user.User(email)));
 
       NavigationService().openDashboard();
     } on FirebaseAuthException catch (e) {
-      emit(LoginState(user: null, error: e.message, loading: false));
+      print(1);
+      print(e);
+      emit(LoginStateError(message: 'error'));
     } catch (e) {
-      emit(LoginState(user: null, error: null, loading: false));
-      throw e.toString();
+      print(2);
+      print(e);
+
+      emit(LoginStateError(message: 'error'));
     }
   }
 }
