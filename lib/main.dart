@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'configs/firebase_constants.dart';
+import 'configs/styles.dart';
 import 'routes.dart';
 import 'services/navigation_service.dart';
 
@@ -33,6 +34,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       navigatorKey: NavigationService.navigationKey,
       routes: Routes(context).getRoutes(),
+      theme: ThemeData(scaffoldBackgroundColor: Styles.bodyColor),
     );
   }
 }
