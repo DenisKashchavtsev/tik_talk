@@ -49,12 +49,16 @@ class Home extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.only(top: 240, left: 45, right: 45),
                   child: Container(
-                    height: 300,
+                    height: 350,
                     decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(40.0))),
                     child: Column(
                       children: [
+                        Container(
+                            padding: const EdgeInsets.only(top: 40, left: 40, right: 40),
+                            child: const Text('Welcome to TikTalk', style: TextStyle(color: Colors.black54, fontSize: 20),)
+                        ),
                         Container(
                           padding: const EdgeInsets.symmetric(
                               vertical: 40, horizontal: 40),
@@ -63,13 +67,7 @@ class Home extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Styles.mainColor,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 30),
-                                      textStyle: const TextStyle(
-                                        fontSize: 20,
-                                      )),
+                                  style: Styles.buttonFilledStyles,
                                   onPressed: () {
                                     Navigator.pushNamed(context, '/login');
                                   },
@@ -79,16 +77,23 @@ class Home extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/register');
-                              },
-                              child: const Text('Register'),
-                            ),
-                          ],
+                        Container(
+                          padding: const EdgeInsets.only(
+                              top: 0, bottom: 40, left: 40, right: 40),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: Styles.buttonStyles,
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/register');
+                                  },
+                                  child: const Text('Register', style: TextStyle(color: Styles.mainColor),),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
