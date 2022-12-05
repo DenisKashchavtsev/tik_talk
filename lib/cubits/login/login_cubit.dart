@@ -18,7 +18,7 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       await _authRepository.login(email, password);
 
-      emit(LoginStateLoaded(user: model_user.User(email)));
+      emit(LoginStateLoaded(user: model_user.User('jbh',email)));
 
       NavigationService().openDashboard();
     } on FirebaseAuthException catch (e) {

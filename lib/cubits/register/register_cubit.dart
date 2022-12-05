@@ -12,15 +12,12 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   RegisterCubit(this._authRepository) : super(RegisterStateInitial());
 
-  Future<void> register(context, String email, String password) async {
+  Future<void> register(context, String name, String email, String password) async {
     emit(RegisterStateLoading());
     try {
-      print(await _authRepository.register(email, password));
-
-      emit(RegisterStateLoaded(user: model_user.User('email@gmail.com')));
-
+      await _authRepository.register(name, email, password);
+      emit(RegisterStateLoaded(user: model_user.User(name, email)));
       NavigationService().openDashboard();
-
     } on FirebaseAuthException catch (e) {
       emit(RegisterStateError(message: e.toString()));
     } catch (e) {

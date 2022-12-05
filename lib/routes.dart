@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'cubits/chat/chat_cubit.dart';
 import 'cubits/login/login_cubit.dart';
 import 'cubits/register/register_cubit.dart';
 import 'cubits/user/user_cubit.dart';
@@ -27,14 +28,23 @@ class Routes {
             create: (BuildContext context) => RegisterCubit(AuthRepository()),
             child: Register(),
           ),
-      '/dashboard': (context) => BlocProvider(
-            create: (context) {
-              final cubit = UserCubit(UserRepository());
-              cubit.getCurrentUser();
-              return cubit;
-            },
-            child: const Dashboard(),
-          ),
+      '/dashboard': (context) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+          create: (context) {
+            final cubit = UserCubit(UserRepository());
+            cubit.getCurrentUser();
+            return cubit;
+          },),
+          BlocProvider(
+          create: (context) {
+          final cubit = ChatCubit();
+          cubit.getChatsByCurrentUser();
+          return cubit;
+          },),
+        ],
+        child: const Dashboard(),
+    ),
     };
   }
 }

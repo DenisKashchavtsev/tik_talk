@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -11,12 +13,12 @@ class UserRepository {
     final currentUser = _auth.currentUser;
 
     if(currentUser != null) {
-      return user_modal.User(currentUser.email);
-      // more information
-      // await _firestore
-      //     .collection('users')
-      //     .doc(currentUser.uid)
-      //     .get()
+      var user = await _firestore
+          .collection('users')
+          .doc(currentUser.uid)
+          .get();
+
+      return user_modal.User(user.data()?['name'], currentUser.email);
     }
     return null;
   }

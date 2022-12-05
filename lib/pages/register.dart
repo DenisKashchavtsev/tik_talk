@@ -6,6 +6,7 @@ import 'widgets/notifications/error.dart';
 import '../cubits/register/register_cubit.dart';
 
 class Register extends StatelessWidget {
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -65,7 +66,7 @@ class Register extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.only(top: 240, left: 45, right: 45),
                   child: Container(
-                    height: 400,
+                    height: 490,
                     decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(40.0))),
@@ -74,6 +75,25 @@ class Register extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(
                               vertical: 40, horizontal: 40),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    enabledBorder: Styles.inputBorder,
+                                    focusedBorder: Styles.focusBorder,
+                                    hintText: 'Name',
+                                  ),
+                                  controller: _nameController,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(
+                              top: 0, bottom: 40, left: 40, right: 40),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -119,7 +139,7 @@ class Register extends StatelessWidget {
                                 child: ElevatedButton(
                                     onPressed: () {
                                       context.read<RegisterCubit>().register(
-                                          context, _emailController.text, _passwordController.text);
+                                          context, _nameController.text, _emailController.text, _passwordController.text);
                                     },
                                     style: Styles.buttonFilledStyles,
                                     child: const Text('Register')),
