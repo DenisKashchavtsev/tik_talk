@@ -10,6 +10,7 @@ import 'pages/home.dart';
 import 'pages/login.dart';
 import 'pages/register.dart';
 import 'repositories/auth_repository.dart';
+import 'repositories/chat_repository.dart';
 import 'repositories/user_repository.dart';
 
 class Routes {
@@ -32,18 +33,14 @@ class Routes {
         providers: [
           BlocProvider(
           create: (context) {
-            final cubit = UserCubit(UserRepository());
-            cubit.getCurrentUser();
-            return cubit;
+            return UserCubit(UserRepository())..getCurrentUser();
           },),
           BlocProvider(
           create: (context) {
-          final cubit = ChatCubit();
-          cubit.getChatsByCurrentUser();
-          return cubit;
+            return ChatCubit(ChatRepository())..getList();
           },),
         ],
-        child: const Dashboard(),
+        child: Dashboard(),
     ),
     };
   }
