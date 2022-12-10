@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../cubits/chat/chat_cubit.dart';
 import '../../cubits/user/user_cubit.dart';
 
 class Menu extends StatelessWidget {
@@ -27,16 +28,22 @@ class Menu extends StatelessWidget {
               );
             },
           ),
-          const ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text('Favorites'),
-            // onTap: () => null,
+          ListTile(
+            leading: const Icon(Icons.favorite),
+            title: const Text('Create chat'),
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, '/create-chat'),
           ),
           const ListTile(
             leading: Icon(Icons.person),
-            title: Text('Friends'),
+            title: Text('asfdasdf'),
             // onTap: () => null,
           ),
+          ElevatedButton(
+              onPressed: () {
+                context.read<ChatCubit>().getList();
+              },
+              child: const Text('get chats'))
         ],
       ),
     );

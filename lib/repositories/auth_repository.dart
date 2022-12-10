@@ -10,7 +10,8 @@ class AuthRepository {
         email: email, password: password);
   }
 
-  Future<UserCredential> register(String name, String email, String password) async {
+  Future<UserCredential> register(
+      String name, String email, String password) async {
     var user = await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
 

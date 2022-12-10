@@ -1,47 +1,43 @@
-import 'dart:io';
+import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/chat.dart';
-import '../models/user.dart' as user_modal;
 
 class ChatRepository {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final _chats = FirebaseFirestore.instance.collection('chats');
 
-  Future getList()  async {
-    final currentUser = _auth.currentUser;
-
-    if(currentUser != null) {
-      final querySnapshot = await _chats.where('uid', isEqualTo: currentUser.uid).get();
-      List chats = <Chat>[];
-      for (final item in querySnapshot.docs) {
-        chats.add(Chat(item.data()['name'], 'Test last message', 0));
-      }
-      return chats;
-    }
-    return null;
+  Future<List<Chat>> getList() async {
+    return await _chats.get().then((snapshot) =>
+        snapshot.docs.map((doc) => Chat.fromJson(doc.data())).toList());
   }
 
-  Future<String> create(String name, String? uid) async {
-    DocumentReference ref = await _chats.add({'name': '$name 😎', 'uid': uid});
-    print(ref);
-    return 'asdf';
-    // return ref.documentID;
+  getOne(String docId) async {
+    /** todo need to get data */
+    return _chats.doc(docId).snapshots();
   }
-  //
-  // void readData(String id) async {
-  //   DocumentSnapshot snapshot = await _firestore.document(id).get();
-  //   print(snapshot.data['name']);
-  // }
-  //
-  // void updateData(DocumentSnapshot doc) async {
-  //   await _firestore.document(doc.documentID).updateData({'todo': 'please 🤫'});
-  // }
-  //
-  // void deleteData(DocumentSnapshot doc) async {
-  //   await _firestore.document(doc.documentID).delete();
-  // }
+
+  create(String name, String? uid) async {
+    await _chats.add({'name': name, 'uid': uid}).then((result) {
+      return true;
+    }).catchError((error) {
+      return true;
+    });
+  }
+
+  update(String doc, String name) async {
+    await _chats.doc(doc).update({'name': name}).then((result) {
+      return true;
+    }).catchError((error) {
+      return true;
+    });
+  }
+
+  delete(String doc) async {
+    await _chats.doc(doc).delete().then((result) {
+      return true;
+    }).catchError((error) {
+      return true;
+    });
+  }
 }
-

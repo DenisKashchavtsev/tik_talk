@@ -8,4 +8,8 @@ class NavigationService {
   void openDashboard() {
     Navigator.pushReplacementNamed(context!, '/dashboard');
   }
+
+  void openCreateChat() {
+    Navigator.pushReplacementNamed(context!, '/create-chat');
+  }
 }

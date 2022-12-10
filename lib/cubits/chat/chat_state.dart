@@ -16,4 +16,8 @@ class ChatStateLoaded extends ChatState {
 
 class ChatStateCreated extends ChatState {}
 
+class ChatStateUpdated extends ChatState {}
+
+class ChatStateDeleted extends ChatState {}
+
 class ChatStateError extends ChatState {}

@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
@@ -17,32 +16,38 @@ class ChatCubit extends Cubit<ChatState> {
 
   getList() async {
     emit(ChatStateLoading());
-    final chats = await _chatRepository.getList();
-    print(chats);
-    emit(ChatStateLoaded(chats: chats));
+    emit(ChatStateLoaded(chats: await _chatRepository.getList()));
   }
 
-  getOne() async {
+  getOne(doc) async {
     emit(ChatStateLoading());
-    // final user = await _chatRepository().getUser();
-    emit(ChatStateLoaded());
+    emit(ChatStateLoaded(chat: await _chatRepository.getOne(doc)));
   }
 
   create(name) async {
     emit(ChatStateLoading());
-    await _chatRepository.create('test1', _auth.currentUser?.uid);
-    emit(ChatStateCreated());
+    if (await _chatRepository.create(name, _auth.currentUser?.uid)) {
+      emit(ChatStateCreated());
+    } else {
+      emit(ChatStateError());
+    }
   }
 
-  update(name) async {
+  update(doc, name) async {
     emit(ChatStateLoading());
-    await _chatRepository.create('test1', _auth.currentUser?.uid);
-    emit(ChatStateCreated());
+    if (await _chatRepository.update(doc, name)) {
+      emit(ChatStateUpdated());
+    } else {
+      emit(ChatStateError());
+    }
   }
 
-  delete(name) async {
+  delete(doc) async {
     emit(ChatStateLoading());
-    await _chatRepository.create('test1', _auth.currentUser?.uid);
-    emit(ChatStateCreated());
+    if (await _chatRepository.delete(doc)) {
+      emit(ChatStateDeleted());
+    } else {
+      emit(ChatStateError());
+    }
   }
 }

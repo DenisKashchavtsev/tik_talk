@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/user.dart' as model_user;
@@ -18,7 +17,7 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       await _authRepository.login(email, password);
 
-      emit(LoginStateLoaded(user: model_user.User('jbh',email)));
+      emit(LoginStateLoaded(user: model_user.User('jbh', email)));
 
       NavigationService().openDashboard();
     } on FirebaseAuthException catch (e) {

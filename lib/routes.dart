@@ -5,6 +5,7 @@ import 'cubits/chat/chat_cubit.dart';
 import 'cubits/login/login_cubit.dart';
 import 'cubits/register/register_cubit.dart';
 import 'cubits/user/user_cubit.dart';
+import 'pages/chat/create_chat.dart';
 import 'pages/dashboard.dart';
 import 'pages/home.dart';
 import 'pages/login.dart';
@@ -30,18 +31,24 @@ class Routes {
             child: Register(),
           ),
       '/dashboard': (context) => MultiBlocProvider(
-        providers: [
-          BlocProvider(
-          create: (context) {
-            return UserCubit(UserRepository())..getCurrentUser();
-          },),
-          BlocProvider(
-          create: (context) {
-            return ChatCubit(ChatRepository())..getList();
-          },),
-        ],
-        child: Dashboard(),
-    ),
+            providers: [
+              BlocProvider(
+                create: (context) {
+                  return UserCubit(UserRepository())..getCurrentUser();
+                },
+              ),
+              BlocProvider(
+                create: (context) {
+                  return ChatCubit(ChatRepository())..getList();
+                },
+              ),
+            ],
+            child: Dashboard(),
+          ),
+      '/create-chat': (context) => BlocProvider(
+            create: (BuildContext context) => ChatCubit(ChatRepository()),
+            child: CreateChat(),
+          ),
     };
   }
 }

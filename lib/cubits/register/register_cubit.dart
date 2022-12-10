@@ -12,7 +12,8 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   RegisterCubit(this._authRepository) : super(RegisterStateInitial());
 
-  Future<void> register(context, String name, String email, String password) async {
+  Future<void> register(
+      context, String name, String email, String password) async {
     emit(RegisterStateLoading());
     try {
       await _authRepository.register(name, email, password);

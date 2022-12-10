@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../cubits/chat/chat_cubit.dart';
-import '../cubits/user/user_cubit.dart';
 import 'widgets/menu.dart';
 
 class Dashboard extends StatelessWidget {
@@ -13,7 +12,6 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     controller.addListener(_scrollListener);
 
     return Scaffold(
@@ -30,27 +28,31 @@ class Dashboard extends StatelessWidget {
               controller: controller,
               itemBuilder: (context, index) {
                 return Slidable(
-                      key: const ValueKey(0),
-                      startActionPane: ActionPane(
-                        motion: const ScrollMotion(),
-                        dismissible: DismissiblePane(onDismissed: () {}),
-                        children: [
-                          SlidableAction(
-                            backgroundColor: Color(0xFFFE4A49),
-                            foregroundColor: Colors.white,
-                            icon: Icons.delete,
-                            label: 'Delete', onPressed: (BuildContext context) {  },
-                          ),
-                          SlidableAction(
-                            backgroundColor: Color(0xFF21B7CA),
-                            foregroundColor: Colors.white,
-                            icon: Icons.share,
-                            label: 'Edit', onPressed: (BuildContext context) {  },
-                          ),
-                        ],
+                  key: const ValueKey(0),
+                  startActionPane: ActionPane(
+                    motion: const ScrollMotion(),
+                    dismissible: DismissiblePane(onDismissed: () {}),
+                    children: [
+                      SlidableAction(
+                        backgroundColor: Color(0xFFFE4A49),
+                        foregroundColor: Colors.white,
+                        icon: Icons.delete,
+                        label: 'Delete',
+                        onPressed: (BuildContext context) {},
                       ),
-                      child: ListTile(title: Text(state.chats![index].name),),
-                    );
+                      SlidableAction(
+                        backgroundColor: Color(0xFF21B7CA),
+                        foregroundColor: Colors.white,
+                        icon: Icons.share,
+                        label: 'Edit',
+                        onPressed: (BuildContext context) {},
+                      ),
+                    ],
+                  ),
+                  child: ListTile(
+                    title: Text(state.chats![index].name),
+                  ),
+                );
               },
             );
           }
@@ -59,9 +61,11 @@ class Dashboard extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-          return ElevatedButton(onPressed: () {
-            context.read<ChatCubit>().getList();
-          }, child: const Text('get chats'));
+          return ElevatedButton(
+              onPressed: () {
+                context.read<ChatCubit>().getList();
+              },
+              child: const Text('get chats'));
         },
       ),
     );

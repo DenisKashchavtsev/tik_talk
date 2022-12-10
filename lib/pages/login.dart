@@ -22,16 +22,14 @@ class Login extends StatelessWidget {
         children: [
           Stack(
             children: <Widget>[
-              Expanded(
-                child: Container(
-                  height: 350,
-                  decoration: const BoxDecoration(
-                      color: Styles.mainColor,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(40.0),
-                        bottomRight: Radius.circular(40.0),
-                      )),
-                ),
+              Container(
+                height: 350,
+                decoration: const BoxDecoration(
+                    color: Styles.mainColor,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(40.0),
+                      bottomRight: Radius.circular(40.0),
+                    )),
               ),
               Container(
                   padding:
@@ -63,97 +61,95 @@ class Login extends StatelessWidget {
                   return const Text('');
                 },
               ),
-              Expanded(
+              Container(
+                padding: const EdgeInsets.only(top: 240, left: 45, right: 45),
                 child: Container(
-                  padding: const EdgeInsets.only(top: 240, left: 45, right: 45),
-                  child: Container(
-                    height: 400,
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(40.0))),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 40, horizontal: 40),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    enabledBorder: Styles.inputBorder,
-                                    focusedBorder: Styles.focusBorder,
-                                    hintText: 'Email',
-                                  ),
-                                  controller: _emailController,
+                  height: 400,
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(40.0))),
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 40, horizontal: 40),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  enabledBorder: Styles.inputBorder,
+                                  focusedBorder: Styles.focusBorder,
+                                  hintText: 'Email',
                                 ),
+                                controller: _emailController,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Container(
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 40, left: 40, right: 40),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    enabledBorder: Styles.inputBorder,
-                                    focusedBorder: Styles.focusBorder,
-                                    hintText: 'Password',
-                                  ),
-                                  controller: _passwordController,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(
+                            top: 0, bottom: 40, left: 40, right: 40),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  enabledBorder: Styles.inputBorder,
+                                  focusedBorder: Styles.focusBorder,
+                                  hintText: 'Password',
                                 ),
+                                controller: _passwordController,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Container(
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 40, left: 40, right: 40),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: ElevatedButton(
-                                    onPressed: () {
-                                      context.read<LoginCubit>().login(
-                                          context,
-                                          _emailController.text,
-                                          _passwordController.text);
-                                    },
-                                    style: Styles.buttonFilledStyles,
-                                    child: const Text('Login')),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(
-                              top: 0, bottom: 40, left: 40, right: 40),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: TextButton(
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(
+                            top: 0, bottom: 40, left: 40, right: 40),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
                                   onPressed: () {
-                                    Navigator.pushNamed(context, '/register');
+                                    context.read<LoginCubit>().login(
+                                        context,
+                                        _emailController.text,
+                                        _passwordController.text);
                                   },
-                                  child: const Text(
-                                    'Register',
-                                    style: TextStyle(
-                                        color: Styles.mainColor, fontSize: 18),
-                                  ),
+                                  style: Styles.buttonFilledStyles,
+                                  child: const Text('Login')),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(
+                            top: 0, bottom: 40, left: 40, right: 40),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/register');
+                                },
+                                child: const Text(
+                                  'Register',
+                                  style: TextStyle(
+                                      color: Styles.mainColor, fontSize: 18),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

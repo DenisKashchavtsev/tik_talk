@@ -29,18 +29,16 @@ class Styles {
       ));
 
   /// Inputs
-  static OutlineInputBorder inputBorder = const OutlineInputBorder( //Outline border type for TextFeild
-  borderRadius: BorderRadius.all(Radius.circular(20)),
+  static OutlineInputBorder inputBorder = const OutlineInputBorder(
+      //Outline border type for TextFeild
+      borderRadius: BorderRadius.all(Radius.circular(20)),
       borderSide: BorderSide(
-        color:Colors.black38,
-      )
-  );
+        color: Colors.black38,
+      ));
 
   static OutlineInputBorder focusBorder = const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        borderSide: BorderSide(
-          color:Styles.mainColor,
-        )
-    );
-  }
-
+      borderRadius: BorderRadius.all(Radius.circular(20)),
+      borderSide: BorderSide(
+        color: Styles.mainColor,
+      ));
+}
