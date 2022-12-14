@@ -6,9 +6,10 @@ import '../models/chat.dart';
 
 class ChatRepository {
   final _chats = FirebaseFirestore.instance.collection('chats');
+  final pagination = 10;
 
-  Future<List<Chat>> getList() async {
-    return await _chats.get().then((snapshot) =>
+  Future<List<Chat>> getList(page) async {
+    return await _chats.limit(pagination).get().then((snapshot) =>
         snapshot.docs.map((doc) => Chat.fromJson(doc.data())).toList());
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+import '../configs/styles.dart';
 import '../cubits/chat/chat_cubit.dart';
 import 'widgets/menu.dart';
 
@@ -12,11 +13,18 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    controller.addListener(_scrollListener);
+    controller.addListener(() {
+      if (controller.offset >= controller.position.maxScrollExtent &&
+          !controller.position.outOfRange) {
+        context.read<ChatCubit>().getList();
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard'),
+        backgroundColor: Styles.mainColor,
+        elevation: 0,
       ),
       drawer: const Menu(),
       body: BlocBuilder<ChatCubit, ChatState>(
@@ -34,14 +42,14 @@ class Dashboard extends StatelessWidget {
                     dismissible: DismissiblePane(onDismissed: () {}),
                     children: [
                       SlidableAction(
-                        backgroundColor: Color(0xFFFE4A49),
+                        backgroundColor: const Color(0xFFFE4A49),
                         foregroundColor: Colors.white,
                         icon: Icons.delete,
                         label: 'Delete',
                         onPressed: (BuildContext context) {},
                       ),
                       SlidableAction(
-                        backgroundColor: Color(0xFF21B7CA),
+                        backgroundColor: const Color(0xFF21B7CA),
                         foregroundColor: Colors.white,
                         icon: Icons.share,
                         label: 'Edit',
@@ -69,12 +77,5 @@ class Dashboard extends StatelessWidget {
         },
       ),
     );
-  }
-
-  void _scrollListener() {
-    if (controller.offset >= controller.position.maxScrollExtent &&
-        !controller.position.outOfRange) {
-      print("at the end of list");
-    }
   }
 }

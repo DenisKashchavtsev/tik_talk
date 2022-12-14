@@ -10,7 +10,7 @@ class Chat {
 
   factory Chat.fromJson(Map<String, dynamic> json) {
     return Chat(
-        name: json['name'] as String,
+        name: json['name'] ?? '',
         unreadCount: json['unreadCount'] ?? 0,
         lastMessage: json['lastMessage'] ?? '');
   }

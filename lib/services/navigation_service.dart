@@ -10,6 +10,6 @@ class NavigationService {
   }
 
   void openCreateChat() {
-    Navigator.pushReplacementNamed(context!, '/create-chat');
+    Navigator.pushNamed(context!, '/create-chat');
   }
 }

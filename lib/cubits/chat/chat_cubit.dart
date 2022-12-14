@@ -5,18 +5,20 @@ import 'package:meta/meta.dart';
 
 import '../../models/chat.dart';
 import '../../repositories/chat_repository.dart';
+import '../../service_locator.dart';
 
 part 'chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final ChatRepository _chatRepository;
+  ChatRepository get _chatRepository => ServiceLocator().chatRepository;
 
-  ChatCubit(this._chatRepository) : super(ChatStateInitial());
+  ChatCubit() : super(ChatStateInitial());
 
-  getList() async {
+  getList({int page = 1}) async {
+    print(page);
     emit(ChatStateLoading());
-    emit(ChatStateLoaded(chats: await _chatRepository.getList()));
+    emit(ChatStateLoaded(chats: await _chatRepository.getList(page)));
   }
 
   getOne(doc) async {

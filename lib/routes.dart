@@ -10,9 +10,6 @@ import 'pages/dashboard.dart';
 import 'pages/home.dart';
 import 'pages/login.dart';
 import 'pages/register.dart';
-import 'repositories/auth_repository.dart';
-import 'repositories/chat_repository.dart';
-import 'repositories/user_repository.dart';
 
 class Routes {
   final BuildContext context;
@@ -23,30 +20,30 @@ class Routes {
     return {
       '/': (context) => const Home(),
       '/login': (context) => BlocProvider(
-            create: (BuildContext context) => LoginCubit(AuthRepository()),
+            create: (BuildContext context) => LoginCubit(),
             child: Login(),
           ),
       '/register': (context) => BlocProvider(
-            create: (BuildContext context) => RegisterCubit(AuthRepository()),
+            create: (BuildContext context) => RegisterCubit(),
             child: Register(),
           ),
       '/dashboard': (context) => MultiBlocProvider(
             providers: [
               BlocProvider(
                 create: (context) {
-                  return UserCubit(UserRepository())..getCurrentUser();
+                  return UserCubit()..getCurrentUser();
                 },
               ),
               BlocProvider(
                 create: (context) {
-                  return ChatCubit(ChatRepository())..getList();
+                  return ChatCubit()..getList();
                 },
               ),
             ],
             child: Dashboard(),
           ),
       '/create-chat': (context) => BlocProvider(
-            create: (BuildContext context) => ChatCubit(ChatRepository()),
+            create: (BuildContext context) => ChatCubit(),
             child: CreateChat(),
           ),
     };

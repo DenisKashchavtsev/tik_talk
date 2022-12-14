@@ -4,14 +4,14 @@ import 'package:meta/meta.dart';
 
 import '../../models/user.dart';
 import '../../repositories/user_repository.dart';
+import '../../service_locator.dart';
 
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
-  final UserRepository _userRepository;
-  final FirebaseFirestore _store = FirebaseFirestore.instance;
+  UserRepository get _userRepository => ServiceLocator().userRepository;
 
-  UserCubit(this._userRepository) : super(UserStateInitial());
+  UserCubit() : super(UserStateInitial());
 
   getCurrentUser() async {
     emit(UserStateLoading());
